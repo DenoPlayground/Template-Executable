@@ -29,9 +29,9 @@ jobs:
       - name: 'Compiling Binaries'
         run: deno task compile:all
       
-      - name: 'Upload Binaries'
-        uses: actions/upload-artifact@v4
+      - name: 'Create new release'
+        uses: ncipollo/release-action@v1
         with:
-          name: 'binaries'
-          path: './bin/**'
-          if-no-files-found: ignore
+          artifacts: 'bin/**'
+          allowUpdates: false
+          makeLatest: true
