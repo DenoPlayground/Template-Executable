@@ -19,20 +19,25 @@ jobs:
     strategy:
       matrix:
         include:
-          - os: unknown-linux-gnu
-            architecture: x86_64
+          - os: 'unknown-linux-gnu'
+            architecture: 'x86_64'
+            extension: 'deb'
 
-          - os: unknown-linux-gnu
-            architecture: aarch64
+          - os: 'unknown-linux-gnu'
+            architecture: 'aarch64'
+            extension: 'deb'
 
-          - os: apple-darwin
-            architecture: x86_64
+          - os: 'apple-darwin'
+            architecture: 'x86_64'
+            extension: 'deb'
 
-          - os: apple-darwin
-            architecture: aarch64
+          - os: 'apple-darwin'
+            architecture: 'aarch64'
+            extension: 'deb'
 
-          - os: pc-windows-msvc
-            architecture: x86_64
+          - os: 'pc-windows-msvc'
+            architecture: 'x86_64'
+            extension: 'exe'
 
     steps:
       - name: 'Setup Repository (${{github.event.repository.name}})'
@@ -50,5 +55,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: 'binaries'
-          path: './bin/${{matrix.architecture}}-${{matrix.os}}'
+          path: './bin/${{matrix.architecture}}-${{matrix.os}}.'
           if-no-files-found: ignore
