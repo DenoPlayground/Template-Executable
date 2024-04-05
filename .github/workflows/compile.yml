@@ -12,19 +12,25 @@ permissions:
 
 jobs:
   compile:
-    name: 'Compile Binaries for x86 64 Unknown Linux GNU'
+    name: 'Compile Binaries'
     runs-on: ubuntu-latest
     env:
       deno-version: v1.x
 
     steps:
-      - name: Setup Repository (${{github.event.repository.name}})
+      - name: 'Setup Repository (${{github.event.repository.name}})'
         uses: actions/checkout@v4
 
-      - name: Setup Deno (${{env.deno-version}})
+      - name: 'Setup Deno (${{env.deno-version}})'
         uses: denoland/setup-deno@v1.1.4
         with:
           deno-version: ${{env.deno-version}}
       
-      - name: Compile Binaries
+      - name: 'Compiling Binaries'
         run: deno task compile:all
+      
+      - name: ''
+        uses: actions/upload-artifact@v4
+        with:
+          path: './bin/**'
+          if-no-files-found: ignore
