@@ -55,5 +55,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: 'binaries'
-          path: './bin/${{matrix.architecture}}-${{matrix.os}}.'
+          path: './bin/${{matrix.architecture}}-${{matrix.os}}.${{matrix.extension}}'
           if-no-files-found: ignore
