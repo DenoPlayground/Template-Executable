@@ -16,6 +16,23 @@ jobs:
     runs-on: ubuntu-latest
     env:
       deno-version: v1.x
+    strategy:
+      matrix:
+        include:
+          - os: unknown-linux-gnu
+            architecture: x86_64
+
+          - os: unknown-linux-gnu
+            architecture: aarch64
+
+          - os: apple-darwin
+            architecture: x86_64
+
+          - os: apple-darwin
+            architecture: aarch64
+
+          - os: pc-windows-msvc
+            architecture: x86_64
 
     steps:
       - name: 'Setup Repository (${{github.event.repository.name}})'
@@ -26,12 +43,12 @@ jobs:
         with:
           deno-version: ${{env.deno-version}}
       
-      - name: 'Compiling Binaries'
-        run: deno task compile:all
+      - name: 'Compiling Binary'
+        run: deno task compile:${{matrix.architecture}}-${{matrix.os}}
       
-      - name: 'Create new release'
-        uses: ncipollo/release-action@v1
+      - name: 'Upload Binary'
+        uses: actions/upload-artifact@v4
         with:
-          artifacts: 'bin/**'
-          allowUpdates: false
-          makeLatest: true
+          name: 'binaries'
+          path: './bin/${{matrix.architecture}}-${{matrix.os}}'
+          if-no-files-found: ignore
