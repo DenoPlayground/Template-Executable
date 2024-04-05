@@ -29,7 +29,7 @@ jobs:
       - name: 'Compiling Binaries'
         run: deno task compile:all
       
-      - name: ''
+      - name: 'Upload Binaries'
         uses: actions/upload-artifact@v4
         with:
           path: './bin/**'
