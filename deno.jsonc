@@ -1,0 +1,43 @@
+{
+    "tasks": {
+      "index": "deno run --check -A ./src/index.ts",
+      "lint": "deno lint",
+      "test": "deno test -A --check --reload --doc --junit-path=\"./report.xml\"",
+      "compile:x86_64-unknown-linux-gnu": "deno compile -A --check --reload --no-npm --target=\"x86_64-unknown-linux-gnu\" --output=\"bin/x86_64-unknown-linux-gnu.deb\" ./src/index.ts",
+      "compile:aarch64-unknown-linux-gnu": "deno compile -A --check --reload --no-npm --target=\"aarch64-unknown-linux-gnu\" --output=\"bin/aarch64-unknown-linux-gnu.deb\" ./src/index.ts",
+      "compile:x86_64-pc-windows-msvc": "deno compile -A --check --reload --no-npm --target=\"x86_64-pc-windows-msvc\" --output=\"bin/x86_64-pc-windows-msvc.exe\" ./src/index.ts",
+      "compile:x86_64-apple-darwin": "deno compile -A --check --reload --no-npm --target=\"x86_64-apple-darwin\" --output=\"bin/x86_64-apple-darwin.deb\" ./src/index.ts",
+      "compile:aarch64-apple-darwin": "deno compile -A --check --reload --no-npm --target=\"aarch64-apple-darwin\" --output=\"bin/aarch64-apple-darwin.deb\" ./src/index.ts",
+      "compile:all": "deno task compile:x86_64-unknown-linux-gnu & deno task compile:aarch64-unknown-linux-gnu & deno task compile:x86_64-pc-windows-msvc & deno task compile:x86_64-apple-darwin & deno task compile:aarch64-apple-darwin"
+    },
+    "test": {
+      "include": [
+        "./src/**/*.test.ts"
+      ]
+    },
+    "lint": {
+      "rules": {
+        "tags": [
+          "recommended"
+        ],
+        "include": [
+          "camelcase",
+          "default-param-last",
+          "eqeqeq",
+          "explicit-function-return-type",
+          "explicit-module-boundary-types",
+          "guard-for-in",
+          "no-eval",
+          "no-sparse-arrays",
+          "prefer-ascii"
+        ],
+        "exclude": [
+          "no-inferrable-types"
+        ]
+      }
+    },
+    "fmt": {
+      "semiColons": true,
+      "singleQuote": true
+    }
+  }

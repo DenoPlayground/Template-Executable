@@ -1,4 +1,4 @@
-name: Compile Binaries
+name: Run Linter
 
 on:
   push:
@@ -11,8 +11,8 @@ permissions:
   checks: write
 
 jobs:
-  x86_64-unknown-linux-gnu:
-    name: 'Compile Binaries for x86 64 Unknown Linux GNU'
+  lint:
+    name: Lint
     runs-on: ubuntu-latest
     env:
       deno-version: v1.x
@@ -27,4 +27,4 @@ jobs:
           deno-version: ${{env.deno-version}}
       
       - name: Run Linter
-        run: deno compile --unstable --target="x86_64-unknown-linux-gnu"
+        run: deno lint
